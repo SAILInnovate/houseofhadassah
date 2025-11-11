@@ -29,11 +29,11 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="py-16 lg:py-24 border-b-2 border-black bg-[#F5F3F0]">
+    <section className="py-16 lg:py-24 border-b-2 border-black bg-[#FDFBF8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-5xl lg:text-6xl text-[#562B00] mb-4">HOW IT WORKS</h2>
-          <div className="w-32 h-1 bg-[#E2725B] mx-auto" />
+          <div className="w-32 h-1 bg-[var(--color-accent)] mx-auto" />
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -45,7 +45,7 @@ export default function HowItWorks() {
                 className="bg-white border-2 border-black neo-shadow p-8 space-y-4 transition-all hover:scale-105"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-6xl font-bold text-[#E2725B] opacity-50">
+                  <span className="text-6xl font-bold text-[var(--color-accent)] opacity-50">
                     {step.number}
                   </span>
                   <Icon size={40} className="text-[#562B00]" />

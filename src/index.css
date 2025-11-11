@@ -6,6 +6,7 @@
   :root {
     --color-bg: #FDFBF8;
     --color-brown: #562B00;
+    --color-accent: #FF7A59;
     --color-terracotta: #E2725B;
     --color-text: #212121;
     --color-black: #000000;
@@ -55,5 +56,20 @@
   .fade-in-up.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+  
+  /* NEW: Added marquee animation */
+  .animate-marquee {
+    animation: marquee 25s linear infinite;
+  }
+}
+
+/* NEW: Added marquee keyframes */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
