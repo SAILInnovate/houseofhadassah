@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Instagram, Facebook, Send, Check, Sparkles } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Instagram, Facebook, Send, Check, Sparkles, Receipt } from 'lucide-react';
 import ClickSpark from './ClickSpark';
 
 // Reusable TikTok Icon
@@ -18,10 +18,25 @@ const TiktokIcon = (props) => (
   </svg>
 );
 
-export default function EnquiryForm() {
+export default function EnquiryForm({ selectedItems = [] }) {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', eventDate: '', guestCount: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // --- AUTO-FILL LOGIC ---
+  // When selectedItems change (from clicking menu items), update the message box
+  useEffect(() => {
+    if (selectedItems.length > 0) {
+      const itemsList = selectedItems.map(i => `• ${i}`).join('\n');
+      const intro = "Hello, I am interested in ordering the following for my event:\n\n";
+      const outro = "\n\nCould you please provide a quote and let me know about availability?";
+      
+      setFormData(prev => ({
+        ...prev,
+        message: `${intro}${itemsList}${outro}`
+      }));
+    }
+  }, [selectedItems]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -86,6 +101,17 @@ export default function EnquiryForm() {
 
         {/* Main Form Card */}
         <div className="bg-white rounded-[2rem] soft-shadow border border-[#E5E0D8] p-8 md:p-12">
+          
+          {/* Selected Items Banner - Visible if items are passed via props */}
+          {selectedItems.length > 0 && (
+             <div className="mb-8 bg-[#FFF5F0] border border-[var(--color-accent)]/20 p-4 rounded-xl flex items-start gap-3 animate-pulse-slow">
+                <Receipt className="text-[var(--color-accent)] shrink-0 mt-1" size={20} />
+                <p className="text-sm text-[#562B00]">
+                  We've added your <strong>{selectedItems.length} selected items</strong> to the message box below. Feel free to add more details!
+                </p>
+             </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-10">
             
             {/* Name Input */}
@@ -172,8 +198,8 @@ export default function EnquiryForm() {
                 value={formData.message} 
                 onChange={handleChange} 
                 required 
-                rows={4} 
-                className="w-full bg-[#F9F7F5] rounded-xl px-6 py-4 text-base text-[var(--color-brown)] border border-transparent focus:border-[var(--color-accent)] focus:bg-white focus:outline-none transition-all resize-none placeholder:text-gray-400" 
+                rows={8} 
+                className="w-full bg-[#F9F7F5] rounded-xl px-6 py-4 text-base text-[var(--color-brown)] border border-transparent focus:border-[var(--color-accent)] focus:bg-white focus:outline-none transition-all resize-none placeholder:text-gray-400 font-sans" 
                 placeholder="Any dietary requirements, specific dishes you love, or questions?..."
               ></textarea>
             </div>
