@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
-import ChristmasBanner from './components/ChristmasBanner';
-import ChristmasMenu from './components/ChristmasMenu';
 import OurStory from './components/OurStory';
 import Menu from './components/Menu';
 import Services from './components/Services';
@@ -52,8 +50,6 @@ function App() {
     <div className="min-h-screen overflow-x-hidden pb-20 md:pb-0"> 
       <Navigation />
       <Hero />
-      <ChristmasBanner />
-      <ChristmasMenu />
       <OurStory />
       
       {/* Pass the selection logic to the Menu */}
